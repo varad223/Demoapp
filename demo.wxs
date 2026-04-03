@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <Product Id="*" Name="ISC Demo App" Language="1033" Version="1.0.0.0"
+           Manufacturer="Demo"
+           UpgradeCode="12345678-1234-1234-1234-123456789012">
+
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MediaTemplate />
+
+    <Feature Id="MainFeature" Title="MainFeature" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ShortcutComponent"/>
+    </Feature>
+
+    <!-- FOLDER STRUCTURE -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="ISCDemoApp" />
+      </Directory>
+      <Directory Id="DesktopFolder" />
+    </Directory>
+
+    <!-- FILE COMPONENTS -->
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+      <Component Id="AppComponent" Guid="*">
+        <File Id="AppFile" Source="app.bat" KeyPath="yes" />
+      </Component>
+
+      <Component Id="ReadmeComponent" Guid="*">
+        <File Source="readme.txt" KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <!-- SHORTCUT + REGISTRY (USER SCOPE) -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ShortcutComponent" Guid="*">
+
+        <Shortcut Id="DesktopShortcut"
+                  Name="ISC Demo App"
+                  Target="[INSTALLFOLDER]app.bat"
+                  WorkingDirectory="INSTALLFOLDER" />
+
+        <RegistryValue Root="HKCU"
+                       Key="Software\DemoISC"
+                       Name="Installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+
+      </Component>
+    </DirectoryRef>
+
+  </Product>
+</Wix>

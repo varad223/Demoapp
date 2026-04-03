@@ -1,0 +1,3 @@
+@echo off
+echo Demo App Running...
+pause
