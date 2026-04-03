@@ -25,11 +25,11 @@
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 
       <Component Id="AppComponent" Guid="*">
-        <File Id="AppFile" Source="app.bat" KeyPath="yes" />
+        <File Id="AppFile" Source="src\app.bat" KeyPath="yes" />
       </Component>
 
       <Component Id="ReadmeComponent" Guid="*">
-        <File Source="readme.txt" KeyPath="yes" />
+        <File Source="src\readme.txt" KeyPath="yes" />
       </Component>
 
     </ComponentGroup>
